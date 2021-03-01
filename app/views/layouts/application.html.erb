@@ -16,6 +16,11 @@
       <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
+    <% if Rails.env.development? %>
+      <div class="alert alert-secondary mt-auto">
+        <%= debug(params)%>
+      </div>
+    <% end %>
     <%= render 'layouts/footer' %>
   </body>
 </html>
