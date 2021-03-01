@@ -1,7 +1,12 @@
-<h1>Showing selected article</h1>
+<h2 class="text-center"><%= @article.title %></h2>
 
-<p>Title: <%= @article.title %></p>
-<p>Description: <%= @article.description %></p>
-
-<%= link_to "Edit", edit_article_path, :style => "margin-right: 20px;" %>
-<%= link_to "Back", articles_path %>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Author: </h5>
+    <h6 class="card-subtitle mb-2 text-muted"><%= @article.created_at.strftime("%H:%M:%S, %B %d, %Y") %></h6>
+    <p class="card-text"><%= @article.description %></p>
+    <%= link_to "Edit", edit_article_path, :class => "btn btn-primary btn-sm" %>
+    <%= link_to "Delete", article_path, method: :delete, data: {confirm: "are you sure you want to delete the article?"}, :class => "btn btn-danger btn-sm" %>
+    <%= link_to "Back", articles_path, :class => "btn btn-secondary btn-sm" %>
+  </div>
+</div>
