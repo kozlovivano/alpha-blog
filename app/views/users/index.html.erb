@@ -7,7 +7,12 @@
     <%= gravatar_for(user) %>
     <div class="media-body">
       <h5 class="mt-0 d-flex justify-content-between">
-        <p><%= link_to user.username, user_path(user) %></p>
+        <p>
+          <%= link_to user.username, user_path(user) %>
+          <% if user.admin? %>
+            <span class="badge badge-sm badge-success ml-2">Admin</span>
+          <% end %>
+        </p>
         <small class="text-muted">Member since: <%= user.created_at.strftime("%B %d, %Y") %></small>
       </h5>
       <div class="d-flex justify-content-between">
@@ -16,7 +21,7 @@
           <% if signed_in? && current_user == user %>
             <%= link_to "Edit", edit_user_path(user), :class => "btn btn-sm btn-primary mr-3" %>
           <% end %>
-          <% if signed_in? && current_user.admin? %>
+          <% if signed_in? && current_user.admin? && !user.admin? %>
             <%= link_to "Remove", user_path(user), :class => "btn btn-sm btn-danger", data: {confirm: "Are you sure to remove this user?"}, method: :delete %>
           <% end %>
         </div>
