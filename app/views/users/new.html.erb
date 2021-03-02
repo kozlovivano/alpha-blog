@@ -1,17 +1,2 @@
-<%= render 'shared/errors', obj: @user %>
-
-<%= form_for @user do |f| %>
-  <div class="mb-3">
-    <%= f.label :username, :class => "form-label" %>
-    <%= f.text_field :username, :class => "form-control", autofocus: true, placeholder: "Username" %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :email, :class => "form-label" %>
-    <%= f.email_field :email, :class => "form-control", placeholder: "Email" %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :password, :class => "form-label" %>
-    <%= f.password_field :password, :class => "form-control", placeholder: "Enter password" %>
-  </div>
-  <%= f.submit "Sign up", :class => "btn btn-primary" %>
-<% end %>
+<h1>Sign up to Open blog</h1>
+<%= render 'form' %>
