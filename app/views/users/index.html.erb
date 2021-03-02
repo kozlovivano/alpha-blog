@@ -1,5 +1,7 @@
 <h1>All bloggers</h1>
-
+<div class="d-flex justify-content-center">
+  <%= will_paginate(@users, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer, class: 'justify-content-center') %>
+</div>
 <% @users.each do |user| %>
   <div class="media mb-3">
     <%= gravatar_for(user) %>
