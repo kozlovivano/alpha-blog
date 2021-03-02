@@ -1,0 +1,15 @@
+<h1>Profile - <%= @user.username %></h1>
+
+<div class="media mb-3">
+  <%= gravatar_for(@user) %>
+  <div class="media-body">
+    <h5 class="mt-0 d-flex justify-content-between">
+      <p><%= @user.username %></p>
+      <small class="text-muted">Member since: <%= @user.created_at.strftime("%B %d, %Y") %></small>
+    </h5>
+    <p><%= @user.email %></p>
+  </div>
+</div>
+
+<h4><%= @user.username %>'s articles (<%= @user.articles.length %>)</h4>
+<%= render 'articles/article', obj: @user.articles %>

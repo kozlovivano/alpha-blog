@@ -2,21 +2,4 @@
 <div>
   <%= link_to "+ Create a new article", new_article_path, :class => "btn btn-success mb-3" %>
 </div>
-<div class="card-columns">
-  <% @articles.each_with_index do |article, index| %>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title"><%= link_to article.title, article_path(article.id) %></h5>
-      <p class="card-text"><%= article.description %></p>
-      <p class="card-text d-flex justify-content-between">
-        <small class="text-muted"><%= article.user.username %></small>
-        <small class="text-muted"><%= time_ago_in_words(article.updated_at.strftime("%H:%M:%S, %B %d, %Y")).capitalize %> ago</small>
-      </p>
-    </div>
-    <div class="card-footer d-flex justify-content-between">
-      <%= link_to "Edit", edit_article_path(article), :class => "btn btn-sm btn-primary" %>
-      <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are you sure?"}, :class => "btn btn-sm btn-danger" %>
-    </div>
-  </div>
-  <% end %>
-</div>
+<%= render 'article', obj: @articles %>
