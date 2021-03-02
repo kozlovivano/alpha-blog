@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update show]
-  before_action :require_user, except: %i[index show]
+  before_action :set_user, only: %i[edit update show destroy]
+  before_action :require_user, except: %i[index show create new]
   before_action :require_same_user, only: %i[edit update]
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
@@ -14,7 +14,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "Welcome to the Open blog #{@user.username}"
-      redirect_to articles_path
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
     else
       render 'new'
     end
@@ -33,6 +34,12 @@ class UsersController < ApplicationController
 
   def show
     @user_articles = @user.articles.paginate(page: params[:page], per_page: 5)
+  end
+
+  def destroy
+    @user.destroy
+    flash[:danger] = "User #{@user.username} has been removed"
+    redirect_to users_path
   end
 
   private

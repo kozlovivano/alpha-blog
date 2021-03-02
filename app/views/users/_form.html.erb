@@ -14,5 +14,9 @@
     <%= f.password_field :password, :class => "form-control", placeholder: "Enter password" %>
   </div>
   <%= f.submit (@user.new_record? ? "Sign up" : "Update"), :class => "btn btn-primary" %>
-  <%= link_to "Cancel", user_path(@user), :class => "btn btn-secondary" %>
+  <% if signed_in? %>
+    <%= link_to "Cancel", user_path(@user), :class => "btn btn-secondary" %>
+  <% else %>
+    <%= link_to "Sign in", signin_path, :class => "btn btn-success" %>
+  <% end %>
 <% end %>
