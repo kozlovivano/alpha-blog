@@ -9,7 +9,7 @@
         <small class="text-muted"><%= time_ago_in_words(article.updated_at.strftime("%H:%M:%S, %B %d, %Y")).capitalize %> ago</small>
       </p>
     </div>
-    <% if signed_in? && article.user == current_user %>
+    <% if signed_in? && (article.user == current_user || current_user.admin?) %>
       <div class="card-footer d-flex justify-content-between">
         <%= link_to "Edit", edit_article_path(article), :class => "btn btn-sm btn-primary" %>
         <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are you sure?"}, :class => "btn btn-sm btn-danger" %>

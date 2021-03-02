@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update show destroy]
   before_action :require_user, except: %i[index show create new]
   before_action :require_same_user, only: %i[edit update]
+  before_action :require_admin, only: [:destroy]
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
   end
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    flash[:danger] = "User #{@user.username} has been removed"
+    flash[:danger] = "User #{@user.username} has been removed and all of articles he/she created also have been removed"
     redirect_to users_path
   end
 
@@ -53,8 +54,15 @@ class UsersController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @user
+    if current_user != @user && !current_user.admin?
       flash[:danger] = 'You can only edit or delete your own profile'
+      redirect_to root_path
+    end
+  end
+
+  def require_admin
+    if signed_in? && !current_user.admin?
+      flash[:danger] = 'Only admin users can perform this action'
       redirect_to root_path
     end
   end

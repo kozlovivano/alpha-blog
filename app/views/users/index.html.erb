@@ -16,7 +16,7 @@
           <% if signed_in? && current_user == user %>
             <%= link_to "Edit", edit_user_path(user), :class => "btn btn-sm btn-primary mr-3" %>
           <% end %>
-          <% if signed_in? %>
+          <% if signed_in? && current_user.admin? %>
             <%= link_to "Remove", user_path(user), :class => "btn btn-sm btn-danger", data: {confirm: "Are you sure to remove this user?"}, method: :delete %>
           <% end %>
         </div>
