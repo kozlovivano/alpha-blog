@@ -4,6 +4,9 @@
     <div class="card-body">
       <h5 class="card-title"><%= link_to article.title, article_path(article.id) %></h5>
       <p class="card-text"><%= simple_format(article.description) %></p>
+      <% if article.categories.any? %>
+        <p>Categories: <%= render article.categories %></p>
+      <% end %>
       <p class="card-text d-flex justify-content-between">
         <small class="text-muted"><%= article.user.username %></small>
         <small class="text-muted"><%= time_ago_in_words(article.updated_at.strftime("%H:%M:%S, %B %d, %Y")).capitalize %> ago</small>
